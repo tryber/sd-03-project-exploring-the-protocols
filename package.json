@@ -5,7 +5,9 @@
   "main": "index.js",
   "scripts": {
     "test": "jest --runInBand --forceExit",
-    "lint": "eslint --no-inline-config --no-error-on-unmatched-pattern -c .eslintrc.json ."
+    "lint": "eslint --no-inline-config --no-error-on-unmatched-pattern -c .eslintrc.json .",
+    "dev": "nodemon node exploiters/serverExploiter.js",
+    "codeClean": "eslint --fix --no-inline-config --no-error-on-unmatched-pattern -c .eslintrc.json ."
   },
   "repository": {
     "type": "git",
@@ -21,6 +23,7 @@
   "dependencies": {
     "jest": "^26.5.2",
     "net": "^1.0.2",
+    "nodemon": "^2.0.6",
     "puppeteer": "^5.3.1"
   },
   "devDependencies": {
