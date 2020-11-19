@@ -97,7 +97,7 @@ Mas não se preocupe, pois por ser um conteúdo novo e representar um desafio um
 
 ### Data de Entrega
 
-O projeto tem até a seguinte data: `DD/MM/YYYY - 14:00h`. Para ser entregue a avaliação final.
+O projeto tem até a seguinte data: `26/11/2020 - 14:00h`. Para ser entregue a avaliação final.
 
 ---
 
