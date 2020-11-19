@@ -1,9 +1,9 @@
 {
   "linkSetup": "",
   "commandExtractNgrok": "",
-   "commandoToken": "",
-   "token": "",
-   "installNgrokPackage": "",
-   "commandStart": "",
-   "commandNgrok": ""
- }
+  "commandoToken": "",
+  "token": "1kWZZ69JNFooJ18P3QXd1iE8v4L_3qFdAc16RHEq6AxXUzBRa",
+  "installNgrokPackage": "",
+  "commandStart": "",
+  "commandNgrok": ""
+}
