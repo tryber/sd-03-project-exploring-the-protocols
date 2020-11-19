@@ -10,17 +10,15 @@ const getHeaderValue = (data, header) => {
   return headerData.split(': ').pop();
 };
 
-const startOfResponse = `HTTP/1.1 200 OK
-Content-type: text/html; charset=UTF-8
-
-`;
+const startOfResponse = 'HTTP/1.1 200 OK\r\nContent-Type: text/html; charset=UTF-8\r\n\r\n';
 
 const endOfResponse = null;
 
 const server = net.createServer((socket) => {
+  console.log('connected');
   socket.on('data', (data) => {
+    console.info('\u001b[34m', 'clientIP:', '\u001b[0m', data.toString());
     const clientIP = getHeaderValue(data.toString(), 'X-Forwarded-For');
-    console.log('\u001b[34m', 'clientIP:', '\u001b[0m', clientIP);
     getLocationInfos(clientIP, () => {
       socket.write(startOfResponse);
       socket.write('<html><head><meta http-equiv="content-type" content="text/html;charset=utf-8">');
@@ -34,4 +32,4 @@ const server = net.createServer((socket) => {
   });
 });
 
-server.listen(8080);
+server.listen(8080, () => console.log('Ouvindo na porta 8080'));
