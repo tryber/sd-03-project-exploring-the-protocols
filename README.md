@@ -188,7 +188,7 @@ Adicione no arquivo `instructions.json` na chave token o seu token **atráves de
 
 > **Dica 2**: Lembre-se que a porta com que devemos rodar o `ngrok` deve ser a porta que o servidor que queremos acessar está rodando! Então sempre verifique a porta que está utilizando no momento.
 
-> **Dica 3**: Existe uma versão do ngrok especifica do seu sistema operacional e adicione na pasta raiz do projeto.
+> **Dica 3**: Existe uma versão do ngrok especifica do seu sistema operacional, adicione na pasta raiz do projeto.
 
 > **Dica 4**: O ngrok só pode abrir um tunel por conta, então tome alguns cuidados:
 
