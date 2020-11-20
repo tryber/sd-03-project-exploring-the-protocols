@@ -13,8 +13,6 @@ const options = {
 const getLocationInfos = (clientIP, cb) => {
   const req = https.request(options, (res) => {
     res.on('data', (locationDataRaw) => {
-      console.info('\u001b[34m', 'res on location', '\u001b[0m', res);
-      console.info('\u001b[34m', 'req on location', '\u001b[0m', req);
       const locationData = JSON.parse(locationDataRaw.toString());
 
       console.log('Location data:');
