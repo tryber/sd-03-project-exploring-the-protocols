@@ -10,13 +10,13 @@ function dataTestid(name) {
 }
 
 function wait(time) {
-    const start = Date.now();
-    while (true) {
-      if (Date.now() - start >= time) {
-        return true;
-      }
+  const start = Date.now();
+  while (true) {
+    if (Date.now() - start >= time) {
+      return true;
     }
   }
+}
 
 describe('Criar um túnel através do Ngrok', () => {
   it('Será validado se os comandos estão dentro do arquivo instruction.json', async () => {
@@ -93,8 +93,8 @@ describe('Responder o IP do client', () => {
 
     await page.goto(BASE_URL);
     await page.waitForSelector('a[target="_blank"]');
-    const url =  await page.$$eval('a[target="_blank"]', (nodes) => nodes.map((n) => n.innerText));
-  
+    const url = await page.$$eval('a[target="_blank"]', (nodes) => nodes.map((n) => n.innerText));
+
     newPage = await browser.newPage();
     newPage.goto(url[1]);
     await newPage.waitForSelector(dataTestid('ip'));
@@ -102,10 +102,10 @@ describe('Responder o IP do client', () => {
 
     expect(textIp).not.toBeNull();
 
-    await ngrok.kill(); 
+    await ngrok.kill();
     client.stdout.on('close', (data) => { data.kill(); });
     client.stdout.on('exit', (data) => { data.kill(); });
-    });
+  });
 });
 
 describe('Responder informações extraídas através do IP do client', () => {
@@ -125,7 +125,7 @@ describe('Responder informações extraídas através do IP do client', () => {
 
     await page.goto(BASE_URL);
     await page.waitForSelector('a[target="_blank"]');
-    const url =  await page.$$eval('a[target="_blank"]', (nodes) => nodes.map((n) => n.innerText));
+    const url = await page.$$eval('a[target="_blank"]', (nodes) => nodes.map((n) => n.innerText));
 
     newPage = await browser.newPage();
     newPage.goto(url[1]);
@@ -146,7 +146,7 @@ describe('Responder informações extraídas através do IP do client', () => {
     expect(textCountry).not.toBeNull();
     expect(textCompany).not.toBeNull();
 
-    await ngrok.kill(); 
+    await ngrok.kill();
     client.stdout.on('close', (data) => { data.kill(); });
     client.stdout.on('exit', (data) => { data.kill(); });
   });
@@ -169,7 +169,7 @@ describe('Responder dados do dispositivo (client)', () => {
 
     await page.goto(BASE_URL);
     await page.waitForSelector('a[target="_blank"]');
-    const url =  await page.$$eval('a[target="_blank"]', (nodes) => nodes.map((n) => n.innerText));
+    const url = await page.$$eval('a[target="_blank"]', (nodes) => nodes.map((n) => n.innerText));
 
     newPage = await browser.newPage();
     newPage.goto(url[1]);
@@ -178,7 +178,7 @@ describe('Responder dados do dispositivo (client)', () => {
 
     expect(deviceText).not.toBeNull();
 
-    await ngrok.kill(); 
+    await ngrok.kill();
     client.stdout.on('close', (data) => { data.kill(); });
     client.stdout.on('exit', (data) => { data.kill(); });
   });
@@ -201,7 +201,7 @@ describe('Responder a request com os resources do Server', () => {
 
     await page.goto(BASE_URL);
     await page.waitForSelector('a[target="_blank"]');
-    const url =  await page.$$eval('a[target="_blank"]', (nodes) => nodes.map((n) => n.innerText));
+    const url = await page.$$eval('a[target="_blank"]', (nodes) => nodes.map((n) => n.innerText));
 
     newPage = await browser.newPage();
     newPage.goto(url[1]);
@@ -216,7 +216,7 @@ describe('Responder a request com os resources do Server', () => {
     expect(textCpu).not.toBeNull();
     expect(textMemory).not.toBeNull();
 
-    await ngrok.kill(); 
+    await ngrok.kill();
     client.stdout.on('close', (data) => { data.kill(); });
     client.stdout.on('exit', (data) => { data.kill(); });
   });
