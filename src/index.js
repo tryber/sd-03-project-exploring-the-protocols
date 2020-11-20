@@ -14,7 +14,6 @@ const getDeviceValue = (data, header) => {
   const headerData = data
     .split('\r\n')
     .find((chunk) => chunk.startsWith(header));
-  console.log(headerData);
   return headerData.split(': ').pop();
 };
 
@@ -24,26 +23,25 @@ const endOfResponse = '\r\n\r\n';
 
 const server = net.createServer((socket) => {
   socket.on('data', (data) => {
-    console.log(data.toString());
     getHeaderValue(data.toString(), 'X-Forwarded-For');
     const device = getDeviceValue(data.toString(), 'User-Agent');
     const clientIP = getHeaderValue(data.toString(), 'X-Forwarded-For');
     getLocationInfos(clientIP, (locationData) => {
-      console.log(locationData);
       socket.write(startOfResponse);
       socket.write('<html><head><meta http-equiv="content-type" content="text/html;charset=utf-8">');
       socket.write('<title>Trybe 🚀</title></head><body>');
       socket.write('<H1>Explorando os Protocolos 🧐🔎</H1>');
       socket.write('<iframe src="https://giphy.com/embed/l3q2zVr6cu95nF6O4" width="480" height="236" frameBorder="0" class="giphy-embed" allowFullScreen></iframe>');
-      socket.write(`<p data-testid="ip">${clientIP}</p>`);
-      socket.write(`<p data-testid="city"">${locationData.city}</p>`);
-      socket.write(`<p data-testid="postal-code">${locationData.postal_code}</p>`);
-      socket.write(`<p data-testid="region">${locationData.region}</p>`);
-      socket.write(`<p data-testid="country">${locationData.country_name}</p>`);
-      socket.write(`<p data-testid="company">${locationData.company}</p>`);
-      socket.write(`<p data-testid="device">${device}</p>`);
+      socket.write(`<p data-testid="ip">ip: ${clientIP}</p>`);
+      socket.write(`<p data-testid="city"> Cidade: ${locationData.city}</p>`);
+      socket.write(`<p data-testid="postal_code"> Código Postal: ${locationData.postal_code}</p>`);
+      socket.write(`<p data-testid="region"> Região: ${locationData.region}</p>`);
+      socket.write(`<p data-testid="country"> País: ${locationData.country_name}</p>`);
+      socket.write(`<p data-testid="company"> Companhia: ${locationData.company}</p>`);
+      socket.write(`<p data-testid="device"> Dispositivo: ${device}</p>`);
       socket.write('</body></html>');
       socket.write(endOfResponse);
+      socket.end();
     });
   });
 });
