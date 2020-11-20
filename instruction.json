@@ -5,5 +5,5 @@
    "token": "1kWeR36c2v13X5FJDnKIfWmoRfV_7BniphYubijGBHDpNgZV9",
    "installNgrokPackage": "",
    "commandStart": "node httpServer.js",
-   "commandNgrok": "./ngrok http 8085"
+   "commandNgrok": "./ngrok http 8080"
  }

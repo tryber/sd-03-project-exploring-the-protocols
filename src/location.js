@@ -5,9 +5,11 @@ const options = {
   port: 443,
   path: '/',
   method: 'POST',
-  'Content-Type': 'application/x-www-form-urlencoded',
+  headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
 };
 
+// Acessa o site iplocation.com para obter os dados do IP obtidos no index.js
+// O buffer locationDataRaw é codificado e parseado para ser enviado novamente à função do server
 const getLocationInfos = (clientIP, cb) => {
   const req = https.request(options, (res) => {
     res.on('data', (locationDataRaw) => {
@@ -23,7 +25,7 @@ const getLocationInfos = (clientIP, cb) => {
   req.on('error', (e) => {
     console.error(e);
   });
-
+  console.log('Teste location');
   req.write(`ip=${clientIP}`);
 
   req.end();

@@ -10,21 +10,28 @@ const getHeaderValue = (data, header) => {
   return headerData.split(': ').pop();
 };
 
-const startOfResponse = `HTTP/1.1 200 OK\r\n
+const startOfResponse = `HTTP/1.1 200 OK
 Content-Type: text/html; charset=UTF-8\r\n`;
 
-const endOfResponse = '\r\n';
+const endOfResponse = '\r\n\r\n';
 
 const server = net.createServer((socket) => {
   socket.on('data', (data) => {
-    getHeaderValue(data.toString('utf-8'), 'X-Forwarded-For');
-    const clientIP = '127.0.0.1';
+    const clientIP = getHeaderValue(data.toString('utf-8'), 'X-Forwarded-For');
+    console.log('Teste index');
 
+    // Pega o IP do cliente usado na request do Ngrok p/ jogar na função (cb) que renderiza no HTML
     getLocationInfos(clientIP, (locationData) => {
       socket.write(startOfResponse);
       socket.write('<html><head><meta http-equiv="content-type" content="text/html;charset=utf-8">');
       socket.write('<title>Trybe 🚀</title></head><body>');
       socket.write('<H1>Explorando os Protocolos 🧐🔎</H1>');
+      socket.write(`Seu IP atual é: <span data-testid="ip">${locationData.ip}</span>`);
+      socket.write(`<span data-testid="company">${locationData.company}</span>`);
+      socket.write(`<span data-testid="city">${locationData.city}</span>`);
+      socket.write(`<span data-testid="region">${locationData.region}</span>`);
+      socket.write(`<span data-testid="postal_code">${locationData.postal_code}</span>`);
+      socket.write(`<span data-testid="country">${locationData.country}</span>`);
       socket.write('<iframe src="https://giphy.com/embed/l3q2zVr6cu95nF6O4" width="480" height="236" frameBorder="0" class="giphy-embed" allowFullScreen></iframe>');
       socket.write('</body></html>');
       socket.write(endOfResponse);
@@ -32,4 +39,4 @@ const server = net.createServer((socket) => {
   });
 });
 
-server.listen(8080);
+server.listen(8080, () => console.log('Escutando na porta 8080'));
