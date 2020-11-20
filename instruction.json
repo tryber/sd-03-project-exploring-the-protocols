@@ -1,9 +1,9 @@
 {
   "linkSetup": "",
-  "commandExtractNgrok": "",
-   "commandoToken": "",
-   "token": "",
+  "commandExtractNgrok": "unzip ngrok/ngrok-stable-linux-amd64.zip",
+   "commandoToken": "./ngrok authtoken 1kWeR36c2v13X5FJDnKIfWmoRfV_7BniphYubijGBHDpNgZV9",
+   "token": "1kWeR36c2v13X5FJDnKIfWmoRfV_7BniphYubijGBHDpNgZV9",
    "installNgrokPackage": "",
-   "commandStart": "",
-   "commandNgrok": ""
+   "commandStart": "node httpServer.js",
+   "commandNgrok": "./ngrok http 8085"
  }

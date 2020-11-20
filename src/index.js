@@ -10,13 +10,15 @@ const getHeaderValue = (data, header) => {
   return headerData.split(': ').pop();
 };
 
-const startOfResponse = null;
+const startOfResponse = `HTTP/1.1 200 OK\r\n
+Content-Type: text/html; charset=UTF-8\r\n`;
 
-const endOfResponse = null;
+const endOfResponse = '\r\n';
 
 const server = net.createServer((socket) => {
   socket.on('data', (data) => {
-    const clientIP = null;
+    getHeaderValue(data.toString('utf-8'), 'X-Forwarded-For');
+    const clientIP = '127.0.0.1';
 
     getLocationInfos(clientIP, (locationData) => {
       socket.write(startOfResponse);
