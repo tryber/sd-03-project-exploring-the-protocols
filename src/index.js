@@ -2,30 +2,26 @@ const net = require('net');
 
 const { getLocationInfos } = require('./location');
 
-const getHeaderValue = (data, header) => {
-  const headerData = data
-    .split('\r\n')
-    .find((chunk) => chunk.startsWith(header));
+// const getHeaderValue = (data, header) => {
+//   const headerData = data
+//     .split('\r\n')
+//     .find((chunk) => chunk.startsWith(header));
 
-  return headerData.split(': ').pop();
-};
-console.log(getHeaderValue);
+//   return headerData.split(': ').pop();
+// };
+// console.log(getHeaderValue);
 
-const RESPONSE = `${[
-  'HTTP/1.1 200 OK',
-  'Content-Type: text/html; charset=UTF-8',
-  '',
-  '<h1 data-testid="server">Protocolos</h1>',
-].join('\r\n')}\r\n\r\n`;
+const startOfResponse = 'HTTP/1.1 200 OK';
 
-const startOfResponse = RESPONSE;
+const endOfResponse = `
 
-const endOfResponse = null;
+
+`;
 
 const server = net.createServer((socket) => {
   socket.on('data', (data) => {
-    console.log(data);
-    const clientIP = null;
+    console.log(data.toString());
+    const clientIP = data.toString();
 
     getLocationInfos(clientIP, (locationData) => {
       console.log(locationData);
