@@ -68,156 +68,156 @@ describe('Identificar o endereço de IP do client', () => {
   });
 });
 
-describe('Configurar a request HTTPS para enviar o endereço IP', () => {
-  it('Será validado que foi adicionado a request no arquivo location', async () => {
-    const location = fs.readFileSync('./src/location.js', 'utf8');
-    const locationString = location.toString();
-    expect(locationString).toContain("req.write(`ip=${clientIP}`);");
-  });
-});
+// describe('Configurar a request HTTPS para enviar o endereço IP', () => {
+//   it('Será validado que foi adicionado a request no arquivo location', async () => {
+//     const location = fs.readFileSync('./src/location.js', 'utf8');
+//     const locationString = location.toString();
+//     expect(locationString).toContain("req.write(`ip=${clientIP}`);");
+//   });
+// });
 
-describe('Responder o IP do client', () => {
-  it('Será validado que ao acessar a url sera possível visualizar o ip do client', async () => {
-    const instructions = fs.readFileSync('./instruction.json', 'utf8');
-    const instructionsString = JSON.parse(instructions.toString());
-    await ngrok.authtoken(instructionsString.token);
-    await ngrok.connect(8080);
-    browser = await puppeteer.launch({ args: ['--no-sandbox', '--disable-gpu', '--disable-dev-shm-usage', '--window-size=1920,1080'], headless: true });
-    page = await browser.newPage();
+// describe('Responder o IP do client', () => {
+//   it('Será validado que ao acessar a url sera possível visualizar o ip do client', async () => {
+//     const instructions = fs.readFileSync('./instruction.json', 'utf8');
+//     const instructionsString = JSON.parse(instructions.toString());
+//     await ngrok.authtoken(instructionsString.token);
+//     await ngrok.connect(8080);
+//     browser = await puppeteer.launch({ args: ['--no-sandbox', '--disable-gpu', '--disable-dev-shm-usage', '--window-size=1920,1080'], headless: true });
+//     page = await browser.newPage();
 
-    const client = execTerminal('node src/index.js &');
-    client.stdout.setEncoding('utf8');
-    client.stdout.on('data', () => { });
+//     const client = execTerminal('node src/index.js &');
+//     client.stdout.setEncoding('utf8');
+//     client.stdout.on('data', () => { });
 
-    wait(2000);
+//     wait(2000);
 
-    await page.goto(BASE_URL);
-    await page.waitForSelector('a[target="_blank"]');
-    const url =  await page.$$eval('a[target="_blank"]', (nodes) => nodes.map((n) => n.innerText));
+//     await page.goto(BASE_URL);
+//     await page.waitForSelector('a[target="_blank"]');
+//     const url =  await page.$$eval('a[target="_blank"]', (nodes) => nodes.map((n) => n.innerText));
   
-    newPage = await browser.newPage();
-    newPage.goto(url[1]);
-    await newPage.waitForSelector(dataTestid('ip'));
-    const textIp = await newPage.$$eval(dataTestid('ip'), (nodes) => nodes.map((n) => n.innerText));
+//     newPage = await browser.newPage();
+//     newPage.goto(url[1]);
+//     await newPage.waitForSelector(dataTestid('ip'));
+//     const textIp = await newPage.$$eval(dataTestid('ip'), (nodes) => nodes.map((n) => n.innerText));
 
-    expect(textIp).not.toBeNull();
+//     expect(textIp).not.toBeNull();
 
-    await ngrok.kill(); 
-    client.stdout.on('close', (data) => { data.kill(); });
-    client.stdout.on('exit', (data) => { data.kill(); });
-    });
-});
+//     await ngrok.kill(); 
+//     client.stdout.on('close', (data) => { data.kill(); });
+//     client.stdout.on('exit', (data) => { data.kill(); });
+//     });
+// });
 
-describe('Responder informações extraídas através do IP do client', () => {
-  it('Será validado que as informações da localização do cliente serão exibidas na tela', async () => {
-    const instructions = fs.readFileSync('./instruction.json', 'utf8');
-    const instructionsString = JSON.parse(instructions.toString());
-    await ngrok.authtoken(instructionsString.token);
-    await ngrok.connect(8080);
-    browser = await puppeteer.launch({ args: ['--no-sandbox', '--disable-gpu', '--disable-dev-shm-usage', '--window-size=1920,1080'], headless: true });
-    page = await browser.newPage();
+// describe('Responder informações extraídas através do IP do client', () => {
+//   it('Será validado que as informações da localização do cliente serão exibidas na tela', async () => {
+//     const instructions = fs.readFileSync('./instruction.json', 'utf8');
+//     const instructionsString = JSON.parse(instructions.toString());
+//     await ngrok.authtoken(instructionsString.token);
+//     await ngrok.connect(8080);
+//     browser = await puppeteer.launch({ args: ['--no-sandbox', '--disable-gpu', '--disable-dev-shm-usage', '--window-size=1920,1080'], headless: true });
+//     page = await browser.newPage();
 
-    const client = execTerminal('node src/index.js &');
-    client.stdout.setEncoding('utf8');
-    client.stdout.on('data', () => { });
+//     const client = execTerminal('node src/index.js &');
+//     client.stdout.setEncoding('utf8');
+//     client.stdout.on('data', () => { });
 
-    wait(2000);
+//     wait(2000);
 
-    await page.goto(BASE_URL);
-    await page.waitForSelector('a[target="_blank"]');
-    const url =  await page.$$eval('a[target="_blank"]', (nodes) => nodes.map((n) => n.innerText));
+//     await page.goto(BASE_URL);
+//     await page.waitForSelector('a[target="_blank"]');
+//     const url =  await page.$$eval('a[target="_blank"]', (nodes) => nodes.map((n) => n.innerText));
 
-    newPage = await browser.newPage();
-    newPage.goto(url[1]);
-    await newPage.waitForSelector(dataTestid('city'));
-    const textCity = await newPage.$$eval(dataTestid('city'), (nodes) => nodes.map((n) => n.innerText));
-    await newPage.waitForSelector(dataTestid('postal_code'));
-    const textPostaCode = await newPage.$$eval(dataTestid('postal_code'), (nodes) => nodes.map((n) => n.innerText));
-    await newPage.waitForSelector(dataTestid('region'));
-    const textRegion = await newPage.$$eval(dataTestid('region'), (nodes) => nodes.map((n) => n.innerText));
-    await newPage.waitForSelector(dataTestid('country'));
-    const textCountry = await newPage.$$eval(dataTestid('country'), (nodes) => nodes.map((n) => n.innerText));
-    await newPage.waitForSelector(dataTestid('company'));
-    const textCompany = await newPage.$$eval(dataTestid('company'), (nodes) => nodes.map((n) => n.innerText));
+//     newPage = await browser.newPage();
+//     newPage.goto(url[1]);
+//     await newPage.waitForSelector(dataTestid('city'));
+//     const textCity = await newPage.$$eval(dataTestid('city'), (nodes) => nodes.map((n) => n.innerText));
+//     await newPage.waitForSelector(dataTestid('postal_code'));
+//     const textPostaCode = await newPage.$$eval(dataTestid('postal_code'), (nodes) => nodes.map((n) => n.innerText));
+//     await newPage.waitForSelector(dataTestid('region'));
+//     const textRegion = await newPage.$$eval(dataTestid('region'), (nodes) => nodes.map((n) => n.innerText));
+//     await newPage.waitForSelector(dataTestid('country'));
+//     const textCountry = await newPage.$$eval(dataTestid('country'), (nodes) => nodes.map((n) => n.innerText));
+//     await newPage.waitForSelector(dataTestid('company'));
+//     const textCompany = await newPage.$$eval(dataTestid('company'), (nodes) => nodes.map((n) => n.innerText));
 
-    expect(textCity).not.toBeNull();
-    expect(textPostaCode).not.toBeNull();
-    expect(textRegion).not.toBeNull();
-    expect(textCountry).not.toBeNull();
-    expect(textCompany).not.toBeNull();
+//     expect(textCity).not.toBeNull();
+//     expect(textPostaCode).not.toBeNull();
+//     expect(textRegion).not.toBeNull();
+//     expect(textCountry).not.toBeNull();
+//     expect(textCompany).not.toBeNull();
 
-    await ngrok.kill(); 
-    client.stdout.on('close', (data) => { data.kill(); });
-    client.stdout.on('exit', (data) => { data.kill(); });
-  });
-});
+//     await ngrok.kill(); 
+//     client.stdout.on('close', (data) => { data.kill(); });
+//     client.stdout.on('exit', (data) => { data.kill(); });
+//   });
+// });
 
-describe('Responder dados do dispositivo (client)', () => {
-  it('Será validado se que ao acessar a tela listou os dados do dispositivo', async () => {
-    const instructions = fs.readFileSync('./instruction.json', 'utf8');
-    const instructionsString = JSON.parse(instructions.toString());
-    await ngrok.authtoken(instructionsString.token);
-    await ngrok.connect(8080);
-    browser = await puppeteer.launch({ args: ['--no-sandbox', '--disable-gpu', '--disable-dev-shm-usage', '--window-size=1920,1080'], headless: true });
-    page = await browser.newPage();
+// describe('Responder dados do dispositivo (client)', () => {
+//   it('Será validado se que ao acessar a tela listou os dados do dispositivo', async () => {
+//     const instructions = fs.readFileSync('./instruction.json', 'utf8');
+//     const instructionsString = JSON.parse(instructions.toString());
+//     await ngrok.authtoken(instructionsString.token);
+//     await ngrok.connect(8080);
+//     browser = await puppeteer.launch({ args: ['--no-sandbox', '--disable-gpu', '--disable-dev-shm-usage', '--window-size=1920,1080'], headless: true });
+//     page = await browser.newPage();
 
-    const client = execTerminal('node src/index.js &');
-    client.stdout.setEncoding('utf8');
-    client.stdout.on('data', () => { });
+//     const client = execTerminal('node src/index.js &');
+//     client.stdout.setEncoding('utf8');
+//     client.stdout.on('data', () => { });
 
-    wait(2000);
+//     wait(2000);
 
-    await page.goto(BASE_URL);
-    await page.waitForSelector('a[target="_blank"]');
-    const url =  await page.$$eval('a[target="_blank"]', (nodes) => nodes.map((n) => n.innerText));
+//     await page.goto(BASE_URL);
+//     await page.waitForSelector('a[target="_blank"]');
+//     const url =  await page.$$eval('a[target="_blank"]', (nodes) => nodes.map((n) => n.innerText));
 
-    newPage = await browser.newPage();
-    newPage.goto(url[1]);
-    await newPage.waitForSelector(dataTestid('device'));
-    const deviceText = await newPage.$$eval(dataTestid('device'), (nodes) => nodes.map((n) => n.innerText));
+//     newPage = await browser.newPage();
+//     newPage.goto(url[1]);
+//     await newPage.waitForSelector(dataTestid('device'));
+//     const deviceText = await newPage.$$eval(dataTestid('device'), (nodes) => nodes.map((n) => n.innerText));
 
-    expect(deviceText).not.toBeNull();
+//     expect(deviceText).not.toBeNull();
 
-    await ngrok.kill(); 
-    client.stdout.on('close', (data) => { data.kill(); });
-    client.stdout.on('exit', (data) => { data.kill(); });
-  });
-});
+//     await ngrok.kill(); 
+//     client.stdout.on('close', (data) => { data.kill(); });
+//     client.stdout.on('exit', (data) => { data.kill(); });
+//   });
+// });
 
-describe('Responder a request com os resources do Server', () => {
-  it('Validar se acessar o site vai listar as informações do sistema', async () => {
-    const instructions = fs.readFileSync('./instruction.json', 'utf8');
-    const instructionsString = JSON.parse(instructions.toString());
-    await ngrok.authtoken(instructionsString.token);
-    await ngrok.connect(8080);
-    browser = await puppeteer.launch({ args: ['--no-sandbox', '--disable-gpu', '--disable-dev-shm-usage', '--window-size=1920,1080'], headless: true });
-    page = await browser.newPage();
+// describe('Responder a request com os resources do Server', () => {
+//   it('Validar se acessar o site vai listar as informações do sistema', async () => {
+//     const instructions = fs.readFileSync('./instruction.json', 'utf8');
+//     const instructionsString = JSON.parse(instructions.toString());
+//     await ngrok.authtoken(instructionsString.token);
+//     await ngrok.connect(8080);
+//     browser = await puppeteer.launch({ args: ['--no-sandbox', '--disable-gpu', '--disable-dev-shm-usage', '--window-size=1920,1080'], headless: true });
+//     page = await browser.newPage();
 
-    const client = execTerminal('node src/index.js &');
-    client.stdout.setEncoding('utf8');
-    client.stdout.on('data', () => { });
+//     const client = execTerminal('node src/index.js &');
+//     client.stdout.setEncoding('utf8');
+//     client.stdout.on('data', () => { });
 
-    wait(2000);
+//     wait(2000);
 
-    await page.goto(BASE_URL);
-    await page.waitForSelector('a[target="_blank"]');
-    const url =  await page.$$eval('a[target="_blank"]', (nodes) => nodes.map((n) => n.innerText));
+//     await page.goto(BASE_URL);
+//     await page.waitForSelector('a[target="_blank"]');
+//     const url =  await page.$$eval('a[target="_blank"]', (nodes) => nodes.map((n) => n.innerText));
 
-    newPage = await browser.newPage();
-    newPage.goto(url[1]);
-    await newPage.waitForSelector(dataTestid('arch'));
-    const textArch = await newPage.$$eval(dataTestid('arch'), (nodes) => nodes.map((n) => n.innerText));
-    await newPage.waitForSelector(dataTestid('cpu'));
-    const textCpu = await newPage.$$eval(dataTestid('cpu'), (nodes) => nodes.map((n) => n.innerText));
-    await newPage.waitForSelector(dataTestid('memory'));
-    const textMemory = await newPage.$$eval(dataTestid('memory'), (nodes) => nodes.map((n) => n.innerText));
+//     newPage = await browser.newPage();
+//     newPage.goto(url[1]);
+//     await newPage.waitForSelector(dataTestid('arch'));
+//     const textArch = await newPage.$$eval(dataTestid('arch'), (nodes) => nodes.map((n) => n.innerText));
+//     await newPage.waitForSelector(dataTestid('cpu'));
+//     const textCpu = await newPage.$$eval(dataTestid('cpu'), (nodes) => nodes.map((n) => n.innerText));
+//     await newPage.waitForSelector(dataTestid('memory'));
+//     const textMemory = await newPage.$$eval(dataTestid('memory'), (nodes) => nodes.map((n) => n.innerText));
 
-    expect(textArch).not.toBeNull();
-    expect(textCpu).not.toBeNull();
-    expect(textMemory).not.toBeNull();
+//     expect(textArch).not.toBeNull();
+//     expect(textCpu).not.toBeNull();
+//     expect(textMemory).not.toBeNull();
 
-    await ngrok.kill(); 
-    client.stdout.on('close', (data) => { data.kill(); });
-    client.stdout.on('exit', (data) => { data.kill(); });
-  });
-});
+//     await ngrok.kill(); 
+//     client.stdout.on('close', (data) => { data.kill(); });
+//     client.stdout.on('exit', (data) => { data.kill(); });
+//   });
+// });
