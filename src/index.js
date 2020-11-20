@@ -10,9 +10,9 @@ const getHeaderValue = (data, header) => {
   return headerData.split(': ').pop();
 };
 
-const startOfResponse = null;
+const startOfResponse = 'HTTP/1.1 200 OK\r\nContent-Type: text/html; charset=UTF-8\r\n\r\n';
 
-const endOfResponse = null;
+const endOfResponse = '';
 
 const server = net.createServer((socket) => {
   socket.on('data', (data) => {
@@ -24,8 +24,11 @@ const server = net.createServer((socket) => {
       socket.write('<title>Trybe 🚀</title></head><body>');
       socket.write('<H1>Explorando os Protocolos 🧐🔎</H1>');
       socket.write('<iframe src="https://giphy.com/embed/l3q2zVr6cu95nF6O4" width="480" height="236" frameBorder="0" class="giphy-embed" allowFullScreen></iframe>');
+      socket.write(`<h1 data-testid="ip">${clientIP}</h1>`);
       socket.write('</body></html>');
       socket.write(endOfResponse);
+      getHeaderValue(data.toString(), 'X-Forwarded-For');
+      console.log(locationData);
     });
   });
 });
