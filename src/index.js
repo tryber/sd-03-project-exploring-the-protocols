@@ -43,8 +43,8 @@ const server = net.createServer((socket) => {
       socket.write('<h3>Informações do Servidor:</h3>');
       socket.write(`<p data-testid="arch">Arch: ${arch}</p>`);
       socket.write('<p>CPUS:<p/>');
-      socket.write('<ul>');
-      cpus.forEach(({ model, speed }) => socket.write(`<li data-testid="cpu">Modelo: ${model} - Velocidade: ${speed}</li>`));
+      socket.write('<ul data-testid="cpu">');
+      cpus.forEach(({ model, speed }) => socket.write(`<li>Modelo: ${model} - Velocidade: ${speed}</li>`));
       socket.write('</ul>');
       socket.write(`<p data-testid="memory">Memória: ${memory}</p>`);
       socket.write('</body></html>');
