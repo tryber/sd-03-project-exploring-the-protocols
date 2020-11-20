@@ -5,7 +5,9 @@
   "main": "index.js",
   "scripts": {
     "test": "jest --runInBand --forceExit",
-    "lint": "eslint --no-inline-config --no-error-on-unmatched-pattern -c .eslintrc.json ."
+    "lint": "eslint --no-inline-config --no-error-on-unmatched-pattern -c .eslintrc.json .",
+    "dev": "nodemon node exploiters/serverExploiter.js",
+    "codeClean": "eslint --fix --no-inline-config --no-error-on-unmatched-pattern -c .eslintrc.json ."
   },
   "repository": {
     "type": "git",
@@ -20,6 +22,9 @@
   "homepage": "https://github.com/betrybe/sd-0x-block38-exploring-the-protocols#readme",
   "dependencies": {
     "jest": "^26.5.2",
+    "net": "^1.0.2",
+    "ngrok": "^3.3.0",
+    "nodemon": "^2.0.6",
     "puppeteer": "^5.3.1"
   },
   "devDependencies": {
