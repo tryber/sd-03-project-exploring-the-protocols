@@ -2,29 +2,26 @@ const net = require('net');
 
 const { getLocationInfos } = require('./location');
 
-// const getHeaderValue = (data, header) => {
-//   const headerData = data
-//     .split('\r\n')
-//     .find((chunk) => chunk.startsWith(header));
+const getHeaderValue = (data, header) => {
+  const headerData = data
+    .split('\r\n')
+    .find((chunk) => chunk.startsWith(header));
+  console.log(headerData);
+  return headerData.split(': ').pop();
+};
+// console.log(getHeaderValue());
 
-//   return headerData.split(': ').pop();
-// };
-// console.log(getHeaderValue);
+const startOfResponse = 'HTTP/1.1 200 OK\r\nContent-Type: text/html; charset=UTF-8\r\n\r\n';
 
-const startOfResponse = 'HTTP/1.1 200 OK';
-
-const endOfResponse = `
-
-
-`;
+const endOfResponse = '\r\n\r\n';
 
 const server = net.createServer((socket) => {
   socket.on('data', (data) => {
     console.log(data.toString());
-    const clientIP = data.toString();
-
+    getHeaderValue(data.toString(), 'X-Forwarded-For');
+    const clientIP = getHeaderValue(data.toString(), 'X-Forwarded-For');
     getLocationInfos(clientIP, (locationData) => {
-      console.log(locationData);
+      // console.log(locationData);
       socket.write(startOfResponse);
       socket.write('<html><head><meta http-equiv="content-type" content="text/html;charset=utf-8">');
       socket.write('<title>Trybe 🚀</title></head><body>');
