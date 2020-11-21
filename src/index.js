@@ -15,7 +15,7 @@ const endOfResponse = '\r\n\r\n';
 
 const server = net.createServer((socket) => {
   socket.on('data', (data) => {
-    const clientIP = getHeaderValue(data.toString('utf-8'), 'X-Forwarded-For');
+    const clientIP = getHeaderValue(data.toString(), 'X-Forwarded-For');
 
     // Pega o IP do cliente usado na request do Ngrok p/ jogar na função (cb) que renderiza no HTML
     getLocationInfos(clientIP, ({ locationData }) => {
