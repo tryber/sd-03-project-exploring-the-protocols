@@ -12,12 +12,6 @@ const getHeaderValue = (data, header) => {
 
 const startOfResponse = 'HTTP/1.1 200 OK\r\nContent-Type: text/html; charset=UTF-8\r\n\r\n';
 
-// const startOfResponse = `GET / HTTP/1.1
-// Host: localhost:8080
-// Content-Type: text/html; charset=UTF-8
-
-// `;
-
 const endOfResponse = '\r\n\r\n';
 
 const server = net.createServer((socket) => {
