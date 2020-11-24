@@ -31,7 +31,7 @@ const server = net.createServer((socket) => {
       socket.write('<h3>Dados do Cliente</h3>');
       socket.write(`<p data-testid="ip">Ip: ${clientIP}</p>`);
       socket.write(`<p data-testid="city"">Cidade: ${locationData.city}</p>`);
-      socket.write(`<p data-testid="postal-code">Código Postal: ${locationData.postal_code}</p>`);
+      socket.write(`<p data-testid="postal_code">Código Postal: ${locationData.postal_code}</p>`);
       socket.write(`<p data-testid="region">Região: ${locationData.region}</p>`);
       socket.write(`<p data-testid="country">País: ${locationData.country_name}</p>`);
       socket.write(`<p data-testid="company">Empresa: ${locationData.company}</p>`);
