@@ -1,4 +1,5 @@
 const net = require('net');
+const os = require('os');
 
 const { getLocationInfos } = require('./location');
 
@@ -18,6 +19,7 @@ const endOfResponse = '\r\n\r\n';
 const server = net.createServer((socket) => {
   socket.on('data', (data) => {
     const clientIP = getHeaderValue(data.toString(), 'X-Forwarded-For');
+    const device = getHeaderValue(data.toString(), 'User-Agent');
     // console.log(data);
 
     getLocationInfos(clientIP, (locationData) => {
@@ -26,12 +28,17 @@ const server = net.createServer((socket) => {
       socket.write('<title>Trybe 🚀</title></head><body>');
       socket.write('<H1>Explorando os Protocolos 🧐🔎</H1>');
       socket.write('<iframe src="https://giphy.com/embed/l3q2zVr6cu95nF6O4" width="480" height="236" frameBorder="0" class="giphy-embed" allowFullScreen></iframe>');
-      socket.write(`<p data-testid="ip">${clientIP}</p>`);
-      socket.write(`<p data-testid="city"">${locationData.city}</p>`);
-      socket.write(`<p data-testid="postal-code">${locationData.postal_code}</p>`);
-      socket.write(`<p data-testid="region">${locationData.region}</p>`);
-      socket.write(`<p data-testid="country">${locationData.country_name}</p>`);
-      socket.write(`<p data-testid="company">${locationData.company}</p>`);
+      socket.write('<h3>Dados do Cliente</h3>');
+      socket.write(`<p data-testid="ip">Ip: ${clientIP}</p>`);
+      socket.write(`<p data-testid="city"">Cidade: ${locationData.city}</p>`);
+      socket.write(`<p data-testid="postal-code">Código Postal: ${locationData.postal_code}</p>`);
+      socket.write(`<p data-testid="region">Região: ${locationData.region}</p>`);
+      socket.write(`<p data-testid="country">País: ${locationData.country_name}</p>`);
+      socket.write(`<p data-testid="company">Empresa: ${locationData.company}</p>`);
+      socket.write(`<p data-testid="device">Aparelho: ${device}</p>`);
+      socket.write(`<p data-testid="arch">Arquitetura: ${os.arch()}</p>`);
+      socket.write(`<p data-testid="cpu">CPU: ${os.cpus().length}</p>`);
+      socket.write(`<p data-testid="memory">Memória: ${os.totalmem() / (1000 * 1000 * 1000)}</p>`);
       socket.write('</body></html>');
       socket.write(endOfResponse);
       socket.end();
