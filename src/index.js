@@ -6,21 +6,21 @@ const getHeaderValue = (data, header) => {
   const headerData = data
     .split('\r\n')
     .find((chunk) => chunk.startsWith(header));
-  
+
   return headerData.split(': ').pop();
 };
-console.log(getHeaderValue)
+console.log(getHeaderValue);
 const startOfResponse = null;
 
 const endOfResponse = null;
 
 const server = net.createServer((socket) => {
   socket.on('data', (data) => {
-    console.log(data)
+    console.log(data);
     const clientIP = null;
 
     getLocationInfos(clientIP, (locationData) => {
-      console.log(locationData)
+      console.log(locationData);
 
       socket.write(startOfResponse);
       socket.write('<html><head><meta http-equiv="content-type" content="text/html;charset=utf-8">');
