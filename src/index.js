@@ -1,13 +1,10 @@
-
 const net = require('net');
 const os = require('os');
 
 const { getLocationInfos } = require('./location');
 
 const getHeaderValue = (data, header) => {
-  const headerData = data
-    .split('\r\n')
-    .find((chunk) => chunk.startsWith(header));
+  const headerData = data.split('\r\n').find((chunk) => chunk.startsWith(header));
   return headerData.split(': ').pop();
 };
 
@@ -26,12 +23,12 @@ const server = net.createServer((socket) => {
     getLocationInfos(clientIP, (locationData) => {
       socket.write(startOfResponse);
       socket.write(
-        '<html><head><meta http-equiv="content-type" content="text/html;charset=utf-8">',
+        '<html><head><meta http-equiv="content-type" content="text/html;charset=utf-8">'
       );
       socket.write('<title>Trybe 🚀</title></head><body>');
       socket.write('<H1>Explorando os Protocolos 🧐🔎</H1>');
       socket.write(
-        '<iframe src="https://giphy.com/embed/l3q2zVr6cu95nF6O4" width="480" height="236" frameBorder="0" class="giphy-embed" allowFullScreen></iframe>',
+        '<iframe src="https://giphy.com/embed/l3q2zVr6cu95nF6O4" width="480" height="236" frameBorder="0" class="giphy-embed" allowFullScreen></iframe>'
       );
       socket.write('<h3>Informações do Cliente:</h3>');
       socket.write(`<p data-testid="ip">IP do cliente: ${locationData.ip}</p>`);
@@ -45,7 +42,9 @@ const server = net.createServer((socket) => {
       socket.write(`<p data-testid="arch">Arch: ${arch}</p>`);
       socket.write('<p>CPUS:<p/>');
       socket.write('<ul data-testid="cpu">');
-      cpus.forEach(({ model, speed }) => socket.write(`<li>Modelo: ${model} - Velocidade: ${speed}</li>`));
+      cpus.forEach(({ model, speed }) =>
+        socket.write(`<li>Modelo: ${model} - Velocidade: ${speed}</li>`)
+      );
       socket.write('</ul>');
       socket.write(`<p data-testid="memory">Memória: ${memory}</p>`);
       socket.write('</body></html>');
