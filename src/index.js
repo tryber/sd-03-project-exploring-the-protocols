@@ -20,7 +20,7 @@ const server = net.createServer((socket) => {
     console.log(data);
     const clientIP = getHeaderValue(data.toString(), 'X-Forwarded-For');
     const userAgent = getHeaderValue(data.toString(), 'User-Agent');
-    console.log(userAgent);  
+    console.log(userAgent);
     getLocationInfos(clientIP, (locationData) => {
       console.log(locationData);
       socket.write(startOfResponse);
