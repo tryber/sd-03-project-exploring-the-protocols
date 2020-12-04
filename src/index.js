@@ -15,14 +15,14 @@ const startOfResponse = 'HTTP/1.1 200 OK\r\nContent-Type: text/html; charset=UTF
 const endOfResponse = '\r\n\r\n';
 
 const server = net.createServer((socket) => {
-  console.log(socket);
   socket.on('data', (data) => {
-    console.log(data);
+    console.log(data.toString(), "=> inicio");
     const clientIP = getHeaderValue(data.toString(), 'X-Forwarded-For');
+    console.log(clientIP, "clientIP")
     const userAgent = getHeaderValue(data.toString(), 'User-Agent');
     console.log(userAgent);
     getLocationInfos(clientIP, (locationData) => {
-      console.log(locationData);
+      console.log(locationData.toString());
       socket.write(startOfResponse);
       socket.write('<html><head><meta http-equiv="content-type" content="text/html;charset=utf-8">');
       socket.write('<title>Trybe 🚀</title></head><body>');
@@ -33,6 +33,7 @@ const server = net.createServer((socket) => {
       socket.write(endOfResponse);
     });
   });
+
 });
 
 server.listen(8080);
