@@ -26,7 +26,8 @@ const server = net.createServer((socket) => {
       socket.write(startOfResponse);
       socket.write('<html><head><meta http-equiv="content-type" content="text/html;charset=utf-8">');
       socket.write('<title>Trybe 🚀</title></head><body>');
-      socket.write('<H1>Explorando os Protocolos 🧐🔎</H1>');socket.write(`<H3 data-testid="city">city: ${locationData.city}</H3>`);
+      socket.write('<H1>Explorando os Protocolos 🧐🔎</H1>');
+      socket.write(`<H3 data-testid="city">city: ${locationData.city}</H3>`);
       socket.write(`<H3 data-testid="postal_code">postal_code: ${locationData.postal_code}</H3>`);
       socket.write(`<H3 data-testid="region">region: ${locationData.region}</H3>`);
       socket.write(`<H3 data-testid="country">country: ${locationData.country_name}</H3>`);
