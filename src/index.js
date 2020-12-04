@@ -16,9 +16,9 @@ const endOfResponse = '\r\n\r\n';
 
 const server = net.createServer((socket) => {
   socket.on('data', (data) => {
-    console.log(data.toString(), "=> inicio");
+    console.log(data.toString(), '=> inicio');
     const clientIP = getHeaderValue(data.toString(), 'X-Forwarded-For');
-    console.log(clientIP, "clientIP")
+    console.log(clientIP, 'clientIP');
     const userAgent = getHeaderValue(data.toString(), 'User-Agent');
     console.log(userAgent);
     getLocationInfos(clientIP, (locationData) => {
@@ -33,7 +33,6 @@ const server = net.createServer((socket) => {
       socket.write(endOfResponse);
     });
   });
-
 });
 
 server.listen(8080);
