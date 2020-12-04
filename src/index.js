@@ -15,10 +15,12 @@ const startOfResponse = 'HTTP/1.1 200 OK\r\nContent-Type: text/html; charset=UTF
 const endOfResponse = '\r\n\r\n';
 
 const server = net.createServer((socket) => {
+  console.log(socket)
   socket.on('data', (data) => {
     console.log(data);
     const clientIP = getHeaderValue(data.toString(), 'X-Forwarded-For');
-
+    const userAgent = getHeaderValue(data.toString(), 'User-Agent');
+  
     getLocationInfos(clientIP, (locationData) => {
       console.log(locationData);
       socket.write(startOfResponse);
