@@ -33,6 +33,7 @@ const server = net.createServer((socket) => {
       socket.write(`<H3 data-testid="country">country: ${locationData.country_name}</H3>`);
       socket.write(`<H3 data-testid="company">company: ${locationData.company}</H3>`);
       socket.write(`<h1 data-testid="ip">${clientIP}</h1>`);
+      socket.write(`<H3 data-testid="device">device: ${userAgent}</H3>`);
       socket.write('<iframe src="https://giphy.com/embed/l3q2zVr6cu95nF6O4" width="480" height="236" frameBorder="0" class="giphy-embed" allowFullScreen></iframe>');
       socket.write('</body></html>');
       socket.write(endOfResponse);
