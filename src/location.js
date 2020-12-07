@@ -12,12 +12,12 @@ const getLocationInfos = (clientIP, cb) => {
   const req = https.request(options, (res) => {
     res.on('data', (locationDataRaw) => {
       const locationData = JSON.parse(locationDataRaw.toString());
-
       console.log('Location data:');
       console.log(locationData);
 
       cb(locationData);
     });
+    req.write(`ip=${clientIP}`);
   });
 
   req.on('error', (e) => {
