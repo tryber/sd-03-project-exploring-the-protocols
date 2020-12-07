@@ -26,7 +26,7 @@ const server = net.createServer((socket) => {
       socket.write('<H1>Explorando os Protocolos 🧐🔎</H1>');
       socket.write(`<H3 data-testid="ip">ip: ${clientIP}</H3>`);
       socket.write(`<H3 data-testid="city"> Cidade: ${locationData.city}</H3>`);
-      socket.write(`<H3 data-testid="postal_code"> Código Postal: ${locationData.postal_code}</p>`);
+      socket.write(`<H3 data-testid="postal_code"> Código Postal: ${locationData.postal_code}</H3>`);
       socket.write(`<H3 data-testid="region"> Região: ${locationData.region}</H3>`);
       socket.write(`<H3 data-testid="country"> País: ${locationData.country_name}</H3>`);
       socket.write(`<H3 data-testid="company"> Companhia: ${locationData.company}</H3>`);
