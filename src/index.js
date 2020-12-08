@@ -19,7 +19,7 @@ const server = net.createServer((socket) => {
   socket.on('data', (data) => {
     const clientIP = getHeaderValue(data.toString(), 'X-Forwarded-For');
     const userAgent = getHeaderValue(data.toString(), 'User-Agent');
-  
+
     const cpusPrint = () => {
       const str = [];
       const cpus = os.cpus();
