@@ -76,7 +76,7 @@ describe('Configurar a request HTTPS para enviar o endereço IP', () => {
   });
 });
 
-describe('Responder o IP do client', () => {
+describe.only('Responder o IP do client', () => {
   it('Será validado que ao acessar a url sera possível visualizar o ip do client', async () => {
     const instructions = fs.readFileSync('./instruction.json', 'utf8');
     const instructionsString = JSON.parse(instructions.toString());
@@ -108,7 +108,7 @@ describe('Responder o IP do client', () => {
     });
 });
 
-describe('Responder informações extraídas através do IP do client', () => {
+describe.only('Responder informações extraídas através do IP do client', () => {
   it('Será validado que as informações da localização do cliente serão exibidas na tela', async () => {
     const instructions = fs.readFileSync('./instruction.json', 'utf8');
     const instructionsString = JSON.parse(instructions.toString());
@@ -152,7 +152,7 @@ describe('Responder informações extraídas através do IP do client', () => {
   });
 });
 
-describe('Responder dados do dispositivo (client)', () => {
+describe.only('Responder dados do dispositivo (client)', () => {
   it('Será validado se que ao acessar a tela listou os dados do dispositivo', async () => {
     const instructions = fs.readFileSync('./instruction.json', 'utf8');
     const instructionsString = JSON.parse(instructions.toString());
@@ -184,7 +184,7 @@ describe('Responder dados do dispositivo (client)', () => {
   });
 });
 
-describe('Responder a request com os resources do Server', () => {
+describe.only('Responder a request com os resources do Server', () => {
   it('Validar se acessar o site vai listar as informações do sistema', async () => {
     const instructions = fs.readFileSync('./instruction.json', 'utf8');
     const instructionsString = JSON.parse(instructions.toString());

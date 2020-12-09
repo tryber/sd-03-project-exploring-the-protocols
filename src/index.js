@@ -4,9 +4,7 @@ const os = require('os');
 const { getLocationInfos } = require('./location');
 
 const getHeaderValue = (data, header) => {
-  console.log('DATA', data);
   const headerData = data.split('\r\n').find((chunk) => chunk.startsWith(header));
-  console.log('HEADER_DATA', headerData);
   return headerData.split(': ').pop();
 };
 
@@ -39,7 +37,7 @@ const server = net.createServer((socket) => {
       socket.write(`<p data-testid="region">Região: ${locationData.region}</p>`);
       socket.write(`<p data-testid="country">País: ${locationData.country}</p>`);
       socket.write(`<p data-testid="company">Companinha: ${locationData.company}</p>`);
-      socket.write(`<p data-testid="divice">Dispositivo: ${userAgent}</p>`);
+      socket.write(`<p data-testid="device">Dispositivo: ${userAgent}</p>`);
       socket.write('<h3>Informações do Servidor:</h3>');
       socket.write(`<p data-testid="arch">Arch: ${arch}</p>`);
       socket.write('<p>CPUS:<p/>');
