@@ -30,11 +30,11 @@ const getLocationInfos = (clientIP, cb) => {
       // console.log(`Companhia (nome da provedora de internet): ${company}`);
 
 
-      city = locationData.city;
-      postalCode = locationData.postal_code;
-      region = locationData.region;
-      country = locationData.country_name;
-      company = locationData.company;
+      // city = locationData.city;
+      // postalCode = locationData.postal_code;
+      // region = locationData.region;
+      // country = locationData.country_name;
+      // company = locationData.company;
 
       cb(locationData);
     });
