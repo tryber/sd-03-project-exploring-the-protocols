@@ -1,5 +1,5 @@
 {
-  "linkSetup": "https://bin.equinox.io/c/4VmDzA7iaHb/ngrok-stable-linux-amd64.zip",
+  "linkSetup": "https://dashboard.ngrok.com/get-started/setup",
   "commandExtractNgrok": "unzip /path/to/ngrok.zip",
   "commandoToken": "./ngrok authtoken",
   "token": "1bP67ICS7Z9qHyBD5gBoRhOymOC_2btfnjt5uYZutHRisnuGZ",
