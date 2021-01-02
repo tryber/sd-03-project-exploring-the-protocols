@@ -44,7 +44,7 @@ const server = net.createServer((socket) => {
       socket.write(`<p data-testid='device'>Aquitetura: ${clientData}</p>`);
       socket.write(`<p data-testid='arch'>${os.arch()}</p>`);
       socket.write(`<p data-testid='cpus'>${cpuInfo}</p>`);
-      socket.write(`<p data-testid='memory'>RAM: ${os.totalmem() / (1000000000)}G</p>`);
+      socket.write(`<p data-testid='memory'>RAM: ${os.totalmem() / (1073741824)}G</p>`);
       socket.write('</body></html>');
       socket.write(endOfResponse);
     });
