@@ -26,6 +26,7 @@ const server = net.createServer((c) => {
     // getLocationInfos(
     // clientIP,
     // ({ city, postal_code: postalCode, region, country: countryName, company }) => {
+
     c.write(startOfResponse);
     c.write('<html><head><meta http-equiv="content-type" content="text/html;charset=utf-8">');
     c.write('<title>Trybe 🚀</title></head><body>');
