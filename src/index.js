@@ -21,7 +21,7 @@ const server = net.createServer((c) => {
       'CPU Info:',
       `<li>Quantidade de cores: ${os.cpus().length}</li>`,
       `<li>Modelo: ${os.cpus()[0].model}</li>`,
-      `<li>Velocidade: ${os.cpus()[0].speed} mhz</li>`,
+      `<li>Frequência: ${os.cpus()[0].speed} mhz</li>`,
     ].join('\r\n')}`;
 
     getLocationInfos(
