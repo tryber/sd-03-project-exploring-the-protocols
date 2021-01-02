@@ -25,7 +25,7 @@ const server = net.createServer((socket) => {
 
     getLocationInfos(clientIP, (locationData) => {
       const {
-        city, postal_code: postalCode, region, country_name: country, company,
+        city, postal_code: postalCode, region, country, company,
       } = locationData;
       socket.write(startOfResponse);
       socket.write('<html><head><meta http-equiv="content-type" content="text/html;charset=utf-8">');
