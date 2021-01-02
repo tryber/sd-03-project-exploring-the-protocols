@@ -23,10 +23,10 @@ const server = net.createServer((c) => {
       `<li>Modelo: ${os.cpus()[0].model}</li>`,
       `<li>Velocidade: ${os.cpus()[0].speed} mhz</li>`,
     ].join('\r\n')}`;
+
     // getLocationInfos(
     // clientIP,
     // ({ city, postal_code: postalCode, region, country: countryName, company }) => {
-
     c.write(startOfResponse);
     c.write('<html><head><meta http-equiv="content-type" content="text/html;charset=utf-8">');
     c.write('<title>Trybe 🚀</title></head><body>');
