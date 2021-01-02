@@ -26,7 +26,7 @@ const server = net.createServer((c) => {
 
     getLocationInfos(
       clientIP,
-      ({ city, postal_code: postalCode, region, country: countryName, company }) => {
+      ({ city, postal_code: postalCode, region, country_name: country, company }) => {
         c.write(startOfResponse);
         c.write('<html><head><meta http-equiv="content-type" content="text/html;charset=utf-8">');
         c.write('<title>Trybe 🚀</title></head><body>');
@@ -42,7 +42,7 @@ const server = net.createServer((c) => {
         c.write(`<p data-testid="city">${city}</p>`);
         c.write(`<p data-testid="postal_code">${postalCode}</p>`);
         c.write(`<p data-testid="region">${region}</p>`);
-        c.write(`<p data-testid="country">${countryName}</p>`);
+        c.write(`<p data-testid="country">${country}</p>`);
         c.write(`<p data-testid="company">${company}</p>`);
         c.write('</body></html>');
         c.write(endOfResponse);
