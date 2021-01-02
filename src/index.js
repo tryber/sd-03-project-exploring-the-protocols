@@ -24,7 +24,7 @@ const server = net.createServer((socket) => {
       `<li>N° de cores: ${os.cpus().length}</li>`,
       `<li>Modelo: ${os.cpus()[0].model}</li>`,
       `<li>Frequência: ${os.cpus()[0].speed} Hz</li>`,
-    ].join('\r\n')}\r\n\r\n`;
+    ].join('\r\n')}`;
 
     getLocationInfos(clientIP, (locationData) => {
       const {
@@ -43,8 +43,8 @@ const server = net.createServer((socket) => {
       socket.write(`<p data-testid='company'>Fornecedora: ${company}</p>`);
       socket.write(`<p data-testid='device'>Aquitetura: ${clientData}</p>`);
       socket.write(`<p data-testid='arch'>${os.arch()}</p>`);
-      socket.write(`<p data-testid='cpus'>${cpuInfo}</p>`);
-      socket.write(`<p data-testid='memory'>RAM: ${os.totalmem() / (1073741824)}G</p>`);
+      socket.write(`<p data-testid='cpu'>${cpuInfo}</p>`);
+      socket.write(`<p data-testid='memory'>RAM: ${os.totalmem()}</p>`);
       socket.write('</body></html>');
       socket.write(endOfResponse);
     });
