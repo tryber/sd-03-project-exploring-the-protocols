@@ -51,4 +51,4 @@ const server = net.createServer((c) => {
   });
 });
 
-server.listen(8080);
+server.listen(8080, () => console.log('80'));
