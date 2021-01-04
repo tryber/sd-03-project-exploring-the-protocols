@@ -11,7 +11,6 @@ const options = {
 const getLocationInfos = (clientIP, cb) => {
   const req = https.request(options, (res) => {
     res.on('data', (locationDataRaw) => {
-      console.log(locationDataRaw.toString());
       const locationData = JSON.parse(locationDataRaw.toString());
 
       console.log('Location data:');
