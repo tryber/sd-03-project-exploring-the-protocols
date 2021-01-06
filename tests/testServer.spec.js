@@ -80,6 +80,7 @@ describe('Responder o IP do client', () => {
   it('Será validado que ao acessar a url sera possível visualizar o ip do client', async () => {
     const instructions = fs.readFileSync('./instruction.json', 'utf8');
     const instructionsString = JSON.parse(instructions.toString());
+    
     await ngrok.authtoken(instructionsString.token);
     await ngrok.connect(8080);
     browser = await puppeteer.launch({ args: ['--no-sandbox', '--disable-gpu', '--disable-dev-shm-usage', '--window-size=1920,1080'], headless: true });
@@ -114,7 +115,7 @@ describe('Responder informações extraídas através do IP do client', () => {
     const instructionsString = JSON.parse(instructions.toString());
     await ngrok.authtoken(instructionsString.token);
     await ngrok.connect(8080);
-    browser = await puppeteer.launch({ args: ['--no-sandbox', '--disable-gpu', '--disable-dev-shm-usage', '--window-size=1920,1080'], headless: true });
+    browser = await puppeteer.launch({ args: ['--no-sandbox', '--disable-gpu', '--disable-dev-shm-usage', '--window-size=1920,1080'], headless: false });
     page = await browser.newPage();
 
     const client = execTerminal('node src/index.js &');
