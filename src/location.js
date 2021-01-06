@@ -5,8 +5,7 @@ const options = {
   port: 'port: 443',
   path: '/',
   method: 'POST',
-  'Content-Type': 'application/x-www-form-urlencoded'
-  ,
+  headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
 };
 
 const getLocationInfos = (clientIP, cb) => {

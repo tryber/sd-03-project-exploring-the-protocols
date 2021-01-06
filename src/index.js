@@ -7,6 +7,7 @@ const getHeaderValue = (data, header) => {
   const headerData = data
     .split('\r\n')
     .find((chunk) => chunk.startsWith(header));
+  console.log(headerData);
 
   return headerData.split(': ').pop();
 };
