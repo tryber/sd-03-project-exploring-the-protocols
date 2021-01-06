@@ -83,7 +83,7 @@ describe('Responder o IP do client', () => {
     
     await ngrok.authtoken(instructionsString.token);
     await ngrok.connect(8080);
-    browser = await puppeteer.launch({ args: ['--no-sandbox', '--disable-gpu', '--disable-dev-shm-usage', '--window-size=1920,1080'], headless: false });
+    browser = await puppeteer.launch({ args: ['--no-sandbox', '--disable-gpu', '--disable-dev-shm-usage', '--window-size=1920,1080'], headless: true });
     page = await browser.newPage();
 
     const client = execTerminal('node src/index.js &');
@@ -109,13 +109,13 @@ describe('Responder o IP do client', () => {
     });
 });
 
-describe.skip('Responder informações extraídas através do IP do client', () => {
+describe('Responder informações extraídas através do IP do client', () => {
   it('Será validado que as informações da localização do cliente serão exibidas na tela', async () => {
     const instructions = fs.readFileSync('./instruction.json', 'utf8');
     const instructionsString = JSON.parse(instructions.toString());
     await ngrok.authtoken(instructionsString.token);
     await ngrok.connect(8080);
-    browser = await puppeteer.launch({ args: ['--no-sandbox', '--disable-gpu', '--disable-dev-shm-usage', '--window-size=1920,1080'], headless: true });
+    browser = await puppeteer.launch({ args: ['--no-sandbox', '--disable-gpu', '--disable-dev-shm-usage', '--window-size=1920,1080'], headless: false });
     page = await browser.newPage();
 
     const client = execTerminal('node src/index.js &');
@@ -153,7 +153,7 @@ describe.skip('Responder informações extraídas através do IP do client', () 
   });
 });
 
-describe.skip('Responder dados do dispositivo (client)', () => {
+describe('Responder dados do dispositivo (client)', () => {
   it('Será validado se que ao acessar a tela listou os dados do dispositivo', async () => {
     const instructions = fs.readFileSync('./instruction.json', 'utf8');
     const instructionsString = JSON.parse(instructions.toString());
@@ -185,7 +185,7 @@ describe.skip('Responder dados do dispositivo (client)', () => {
   });
 });
 
-describe.skip('Responder a request com os resources do Server', () => {
+describe('Responder a request com os resources do Server', () => {
   it('Validar se acessar o site vai listar as informações do sistema', async () => {
     const instructions = fs.readFileSync('./instruction.json', 'utf8');
     const instructionsString = JSON.parse(instructions.toString());
